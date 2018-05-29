@@ -7,7 +7,7 @@ import {
     SELECT_WIDGET_TYPE
 } from "../constants";
 import WidgetService from "../service/widgetService";
-import {PARAGRAPH} from "../constants/widgetType";
+import {HEADING, PARAGRAPH} from "../constants/widgetType";
 
 let initialState = {widgets: []}
 
@@ -25,8 +25,9 @@ export const widgetReducer = (state = initialState, action) => {
                     ...state.widgets,
                     {
                         id: state.widgets.length + 1,
-                        text: 'New widget',
-                        widgetType: PARAGRAPH
+                        text: 'New content',
+                        widgetType: HEADING,
+                        size: 1
                     }
                 ]
             }
