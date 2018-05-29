@@ -17,11 +17,16 @@ export const List = () => (
     <h2>List</h2>
 )
 
-export const Heading = ({widget, headingSizeChanged}) => {
+export const Heading = ({widget, headingSizeChanged, headingTextChanged}) => {
     let selectElem
+    let inputElem
     return (
         <div>
             <h2>Heading {widget.size}</h2>
+            <input
+                ref={node => inputElem = node}
+                value={widget.text}
+                onChange={() => headingTextChanged(widget.id, inputElem.value)}/>
             <select
                 ref={node => selectElem = node}
                 onChange={() => headingSizeChanged(widget.id, selectElem.value)}>
@@ -38,7 +43,8 @@ export const Heading = ({widget, headingSizeChanged}) => {
 }
 
 const headingDispatchMapper = dispatch => ({
-    headingSizeChanged: (wid, size) => actions.headingSizeChanged(dispatch, wid, size)
+    headingSizeChanged: (wid, size) => actions.headingSizeChanged(dispatch, wid, size),
+    headingTextChanged: (wid, text) => actions.headingTextChanged(dispatch, wid, text)
 })
 
 const headingStateMapper = state => ({

@@ -23,3 +23,10 @@ export const headingSizeChanged = (dispatch, wid, newSize) => (
         id: wid,
         size: newSize})
 )
+
+export const headingTextChanged = (dispatch, wid, newText) => (
+    dispatch({
+        type: constants.HEADING_TEXT_CHANGED,
+        id: wid,
+        text: newText})
+)

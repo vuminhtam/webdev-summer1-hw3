@@ -2,7 +2,7 @@ import {
     ADD_WIDGET,
     DELETE_WIDGET,
     FIND_ALL_WIDGETS,
-    HEADING_SIZE_CHANGED,
+    HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED,
     SAVE,
     SELECT_WIDGET_TYPE
 } from "../constants";
@@ -56,6 +56,16 @@ export const widgetReducer = (state = initialState, action) => {
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.size = action.size
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
+
+        case HEADING_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.text = action.text
                     }
                     return Object.assign({}, widget)
                 })
