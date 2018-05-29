@@ -20,4 +20,13 @@ class WidgetService {
         return fetch(WIDGET_API)
             .then(response => (response.json()))
     }
+
+    save(overrideList) {
+        return fetch(WIDGET_API + '/save', {
+            method: 'post',
+            body: JSON.stringify(overrideList),
+            headers: {
+                'content-type': 'application/json'}
+        })
+    }
 }

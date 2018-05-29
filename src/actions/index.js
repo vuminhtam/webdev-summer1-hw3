@@ -9,10 +9,10 @@ export const findAllWidgets = dispatch => {
             widgets: widgets }))
 }
 
-export const addWidget = dispatch => (
+export const addWidget = dispatch => {
     dispatch({type: ADD_WIDGET})
-)
+}
 
-export const save = dispatch => (
+export const save = dispatch => {
     dispatch({type: SAVE})
-)
+}
