@@ -2,7 +2,7 @@ import React from 'react'
 import {DELETE_WIDGET, SELECT_WIDGET_TYPE} from "../constants";
 import {connect} from 'react-redux'
 import {HEADING, IMAGE, LIST, PARAGRAPH} from "../constants/widgetType";
-import {Heading, Paragraph, Image, List} from "../component/widgetCmpType"
+import {HeadingContainer, Paragraph, Image, List} from "../component/widgetCmpType"
 
 export const WidgetItem = ({widget, dispatch}) => {
     let selectElement
@@ -34,7 +34,7 @@ export const WidgetItem = ({widget, dispatch}) => {
             )}>Delete
             </button>
             <div>
-                {widget.widgetType=== HEADING && <Heading/>}
+                {widget.widgetType=== HEADING && <HeadingContainer widget={widget}/>}
                 {widget.widgetType=== PARAGRAPH && <Paragraph/>}
                 {widget.widgetType=== LIST && <List/>}
                 {widget.widgetType=== IMAGE && <Image/>}

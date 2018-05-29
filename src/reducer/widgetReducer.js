@@ -1,4 +1,11 @@
-import {ADD_WIDGET, DELETE_WIDGET, FIND_ALL_WIDGETS, SAVE, SELECT_WIDGET_TYPE} from "../constants";
+import {
+    ADD_WIDGET,
+    DELETE_WIDGET,
+    FIND_ALL_WIDGETS,
+    HEADING_SIZE_CHANGED,
+    SAVE,
+    SELECT_WIDGET_TYPE
+} from "../constants";
 import WidgetService from "../service/widgetService";
 import {PARAGRAPH} from "../constants/widgetType";
 
@@ -43,6 +50,15 @@ export const widgetReducer = (state = initialState, action) => {
             }
             return JSON.parse(JSON.stringify(newState))
 
+        case HEADING_SIZE_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.size = action.size
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
         default:
             return state
     }
