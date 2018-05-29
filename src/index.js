@@ -4,6 +4,16 @@ import ReactDOM from 'react-dom';
 import { createStore } from 'redux'
 import { Provider, connect } from 'react-redux'
 
+
+//service
+const findAllWidgets = dispatch => {
+    fetch('http://localhost:8080/api/widget')
+        .then(response => (response.json()))
+        .then(widgets => dispatch({
+            type: 'FIND_ALL_WIDGETS',
+            widgets: widgets }))
+}
+
 let initialState = {
     widgets:
         [{id:1, text: 'Widget 1'},
@@ -23,21 +33,40 @@ const Widget = ({widget, dispatch}) => (
 
 const WidgetContainer = connect()(Widget)
 
-const WidgetList = ({widgets, dispatch}) => (
-    <div>
-        <h1>WidgetList ({widgets.length})</h1>
-        <ul>
-            {widgets.map(widget => (
-                <WidgetContainer widget={widget}
-                        key={widget.id}/>
-            ))}
-        </ul>
-        <button onClick={e => (dispatch({type: 'ADD_WIDGET'}))}>Add</button>
-    </div>
-)
+class WidgetList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.props.findAllWidgets()
+    }
+    render() {
+        return(
+            <div>
+                <h1>Widget List {this.props.widgets.length}</h1>
+
+                <button hidden={this.props.previewMode} onClick={this.props.save}>
+                    Save
+                </button>
+
+                <ul>
+                    {this.props.widgets.map(widget => (
+                        <WidgetContainer widget={widget}
+                                         key={widget.id}/>
+                    ))}
+                </ul>
+                <button onClick={e => (
+                    this.props.dispatch({type: 'ADD_WIDGET'})
+                )}>Add</button>
+            </div>
+        )
+    }
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'FIND_ALL_WIDGETS':
+            return {
+                widgets: action.widgets
+            }
         case 'ADD_WIDGET':
             console.log('add widget')
             return {
@@ -58,11 +87,16 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-const mapper = (state) => (
+const stateMapper = (state) => (
     {widgets: state.widgets}
 )
 
-const App = connect(mapper)(WidgetList)
+const dispatchMapper = dispatch => ({
+    findAllWidgets: () => findAllWidgets(dispatch)
+})
+
+
+const App = connect(stateMapper, dispatchMapper)(WidgetList)
 
 ReactDOM.render(
     <Provider store={createStore(reducer)}>
@@ -70,3 +104,4 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 )
+
