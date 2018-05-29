@@ -30,3 +30,7 @@ export const headingTextChanged = (dispatch, wid, newText) => (
         id: wid,
         text: newText})
 )
+
+export const preview = dispatch => {
+    dispatch({type: constants.PREVIEW})
+}

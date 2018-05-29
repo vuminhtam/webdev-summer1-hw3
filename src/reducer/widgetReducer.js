@@ -2,18 +2,19 @@ import {
     ADD_WIDGET,
     DELETE_WIDGET,
     FIND_ALL_WIDGETS,
-    HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED,
+    HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED, PREVIEW,
     SAVE,
     SELECT_WIDGET_TYPE
 } from "../constants";
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH} from "../constants/widgetType";
 
-let initialState = {widgets: []}
+let initialState = {widgets: [], preview: false}
 
 const widgetService = WidgetService.instance
 
 export const widgetReducer = (state = initialState, action) => {
+    let cloneState
     switch (action.type) {
         case FIND_ALL_WIDGETS:
             return {
@@ -70,6 +71,11 @@ export const widgetReducer = (state = initialState, action) => {
                     return Object.assign({}, widget)
                 })
             }
+
+        case PREVIEW:
+            cloneState = Object.assign({}, state)
+            cloneState.preview = !state.preview
+            return cloneState
         default:
             return state
     }
