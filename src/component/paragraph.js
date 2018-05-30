@@ -14,8 +14,8 @@ export const Paragraph = ({inPreviewMode, editingWidget,  widget, textChanged}) 
                     onChange={() => textChanged(widget.id, inputElem.value)}></textarea>
             </div>
 
-            <div>
-                Preview paragraph
+            Preview paragraph
+            <div class="card-footer text-muted">
                 <br/>
                 {widget.text}
             </div>

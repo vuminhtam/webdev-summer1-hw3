@@ -21,9 +21,8 @@ export const LinkText = ({inPreviewMode, editingWidget, widget, renderImgURL, he
                     onChange={() => renderImgURL(widget.id, inputUrl.value)}/>
             </div>
 
-            <div>
-                Preview hyperlink text
-                <br/>
+            Preview hyperlink text
+            <div class="card-footer text-muted">
                 <a href={widget.href} target="_blank">{widget.text}</a>
             </div>
 

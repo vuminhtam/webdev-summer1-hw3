@@ -23,8 +23,8 @@ export const List = ({inPreviewMode, editingWidget, widget, textChanged, listTyp
                 </select>
             </div>
 
-            <div>
-                Preview {widget.listType} items
+            Preview {widget.listType} items
+            <div class="card-footer text-muted">
                 {widget.listType == ORDERED_LIST && <ol>{textToHTML(widget.text)}</ol>}
                 {widget.listType == UNORDERED_LIST && <ul>{textToHTML(widget.text)}</ul>}
             </div>

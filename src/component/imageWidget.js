@@ -15,7 +15,7 @@ export const Image = ({inPreviewMode, editingWidget, widget, renderImgURL}) => {
                 <button onClick={() => renderImgURL(widget.id, inputElem.value)}>Render</button>
             </div>
 
-            <div>
+            <div class="card-footer text-muted">
                 Preview image
                 <br/>
                 <img src={widget.href}

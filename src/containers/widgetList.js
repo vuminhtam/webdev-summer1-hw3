@@ -2,6 +2,7 @@ import {addWidget, findAllWidgets, save, preview} from "../actions";
 import React from "react";
 import {connect } from 'react-redux'
 import {WidgetContainer} from "../component/widgetItem";
+import {Badge, Button} from 'react-bootstrap';
 
 export default
 class WidgetList extends React.Component {
@@ -10,30 +11,48 @@ class WidgetList extends React.Component {
         this.props.findAllWidgets()
     }
     render() {
-        console.log(this.props)
         return(
             <div>
-                <h1>LESSON EDITOR</h1>
 
-                <button hidden={this.props.inPreviewMode}
-                        onClick={this.props.save}>
-                    Save
-                </button>
-                <button onClick={this.props.preview}>
-                    Preview
-                </button>
+                <h1>CONTENT EDITOR
+                    <span className="badge badge-light">{this.props.widgets.length}</span>
+                </h1>
 
-                <ul>
-                    {this.props.widgets.map(widget => (
-                        <WidgetContainer widget={widget}
-                                         key={widget.id}
-                                         inPreviewMode={this.props.inPreviewMode}/>
-                    ))}
-                </ul>
+                <div className="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                <button class="btn btn-success"
+                    hidden={this.props.inPreviewMode}
+                    onClick={this.props.save}>
+                    <i className="fas fa-save"></i>
+                </button>
+                <button class="btn btn-secondary"
+                    onClick={this.props.preview}>
+                    {setPreviewText(this.props.inPreviewMode)}
+                </button>
+                </div>
+
+
+                <div className="card">
+                    <ul className="list-group list-group-flush">
+                        {this.props.widgets.map(widget => (
+                            <WidgetContainer widget={widget}
+                                             key={widget.id}
+                                             inPreviewMode={this.props.inPreviewMode}/>
+                        ))}
+                    </ul>
+                </div>
+
                 <button
                     onClick={this.props.addWidget}>Add</button>
             </div>
         )
+    }
+}
+
+const setPreviewText = (inMode) => {
+    if(!inMode) {
+        return <i className="far fa-eye"></i>
+    } else {
+        return <i className="fas fa-chevron-left"></i>
     }
 }
 

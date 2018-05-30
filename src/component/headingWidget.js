@@ -2,7 +2,6 @@ import React from 'react'
 import * as actions from "../actions";
 import {connect} from 'react-redux'
 
-
 export const Heading = ({inPreviewMode, editingWidget, widget, headingSizeChanged, headingTextChanged}) => {
     let selectElem
     let inputElem
@@ -23,8 +22,7 @@ export const Heading = ({inPreviewMode, editingWidget, widget, headingSizeChange
                 </select>
             </div>
 
-            <div>
-                Preview heading
+            <div class="card-footer text-muted">
                 {widget.size == 1 && <h1>{widget.text}</h1>}
                 {widget.size == 2 && <h2>{widget.text}</h2>}
                 {widget.size == 3 && <h3>{widget.text}</h3>}
