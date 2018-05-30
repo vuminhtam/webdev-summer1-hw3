@@ -2,7 +2,7 @@ import React from 'react'
 import {
     DELETE_WIDGET,
     MOVE_WIDGET_DOWN,
-    MOVE_WIDGET_UP,
+    MOVE_WIDGET_UP, SAVE,
     SELECT_EDIT,
     SELECT_WIDGET_TYPE,
     WIDGET_NAME_CHANGED
@@ -26,7 +26,6 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
             <caption> [{widget.widgetType}] {widgetName}</caption>
             <li>
             <div class="text-right" role="toolbar">
-
                 <button
                     hidden={!(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
                     className="btn btn-warning"
@@ -88,13 +87,23 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                         </input>
                     </div>
 
-                    <button
-                        hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
-                        className="btn btn-danger"
-                        onClick={e => (
-                            dispatch({type: DELETE_WIDGET, id: widget.id})
-                        )}><i className="fas fa-times"></i>
-                    </button>
+                    <div
+                        hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}>
+                        <button className="btn btn-success"
+                                onClick={e => (
+                                    dispatch(
+                                        {type: SAVE})
+                                )}>
+                            <i className="far fa-save"></i>
+                        </button>
+
+                        <button
+                            className="btn btn-danger"
+                            onClick={e => (
+                                dispatch({type: DELETE_WIDGET, id: widget.id})
+                            )}><i className="fas fa-times"></i>
+                        </button>
+                    </div>
                 </div>
 
 
