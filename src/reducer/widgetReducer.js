@@ -38,7 +38,8 @@ export const widgetReducer = (state = initialState, action) => {
                         widgetType: HEADING,
                         size: 1,
                         listType: UNORDERED_LIST,
-                        widget_order: state.widgets.length + 1
+                        widget_order: state.widgets.length + 1,
+                        name: 'Widget #' + (state.widgets.length + 1)
                     }
                 ]
             cloneState.widgets = newWidgets
@@ -47,6 +48,7 @@ export const widgetReducer = (state = initialState, action) => {
             return cloneState
         case DELETE_WIDGET:
             return {
+                preview: true,
                 widgets: state.widgets.filter(widget => (
                     widget.id !== action.id
                 ))
@@ -57,6 +59,7 @@ export const widgetReducer = (state = initialState, action) => {
             state.widgets.map((widget) => {
                 widget.widget_order = order;
                 order = order + 1;
+                widget.name = 'Widget #' + (widget.widget_order + 1)
             })
             widgetService.save(state.widgets)
             return state

@@ -22,6 +22,7 @@ export const Heading = ({inPreviewMode, editingWidget, widget, headingSizeChange
                 </select>
             </div>
 
+            Preview heading
             <div class="card-footer text-muted">
                 {widget.size == 1 && <h1>{widget.text}</h1>}
                 {widget.size == 2 && <h2>{widget.text}</h2>}

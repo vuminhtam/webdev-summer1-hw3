@@ -11,9 +11,12 @@ import {LinkTextContainer} from "./linkText";
 
 export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => {
     let selectElement
+    let widgetName = widget.name
     return (
-        <div className={setBorder(inPreviewMode, editingWidget, widget)}>
-        <li>
+        <div title={widgetName}
+            className={setBorder(inPreviewMode, editingWidget, widget)}>
+            <caption> [{widget.widgetType}] {widgetName}</caption>
+            <li>
             <div class="text-right" role="toolbar">
 
                 <button
@@ -61,7 +64,7 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                 </select>
                     <div className="input-group-append">
                     <label className="input-group-text" htmlFor="inputGroupSelect02">
-                        Widget #{widget.widget_order}
+                        {widgetName}
                     </label>
                     </div>
 
