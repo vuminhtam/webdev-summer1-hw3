@@ -6,7 +6,7 @@ export const Paragraph = ({inPreviewMode, widget, textChanged}) => {
     let inputElem
     return (
         <div>
-            <div>
+            <div hidden={inPreviewMode}>
                 <textarea
                     placeholder="Paragraph text"
                     ref={node => inputElem = node}
@@ -14,7 +14,11 @@ export const Paragraph = ({inPreviewMode, widget, textChanged}) => {
                     onChange={() => textChanged(widget.id, inputElem.value)}></textarea>
             </div>
 
-            {widget.text}
+            <div>
+                Preview paragraph
+                <br/>
+                {widget.text}
+            </div>
         </div>
     )
 }

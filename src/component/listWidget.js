@@ -8,7 +8,7 @@ export const List = ({inPreviewMode, widget, textChanged, listTypeChanged}) => {
     let listType
     return (
         <div>
-            <div>
+            <div hidden={inPreviewMode}>
                 <textarea
                     placeholder="Enter one list item per line"
                     ref={node => inputElem = node}
@@ -24,13 +24,10 @@ export const List = ({inPreviewMode, widget, textChanged, listTypeChanged}) => {
             </div>
 
             <div>
-                Preview
+                Preview {widget.listType} items
                 {widget.listType == ORDERED_LIST && <ol>{textToHTML(widget.text)}</ol>}
                 {widget.listType == UNORDERED_LIST && <ul>{textToHTML(widget.text)}</ul>}
             </div>
-            {/*<ul>*/}
-                {/*{textToHTML(widget.text)}*/}
-            {/*</ul>*/}
         </div>
     )
 }

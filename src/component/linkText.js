@@ -7,7 +7,7 @@ export const LinkText = ({inPreviewMode, widget, renderImgURL, headingTextChange
     let inputUrl
     return (
         <div>
-            <div>
+            <div hidden={inPreviewMode}>
                 <input
                     placeholder="Link text"
                     ref={node => inputText = node}
@@ -22,6 +22,8 @@ export const LinkText = ({inPreviewMode, widget, renderImgURL, headingTextChange
             </div>
 
             <div>
+                Preview hyperlink text
+                <br/>
                 <a href={widget.href} target="_blank">{widget.text}</a>
             </div>
 

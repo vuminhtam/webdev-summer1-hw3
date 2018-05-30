@@ -7,7 +7,7 @@ export const Image = ({inPreviewMode, widget, renderImgURL}) => {
     let inputElem
     return (
         <div>
-            <div>
+            <div hidden={inPreviewMode}>
                 <input
                 placeholder="Image URL"
                 ref={node => inputElem = node}
@@ -16,6 +16,8 @@ export const Image = ({inPreviewMode, widget, renderImgURL}) => {
             </div>
 
             <div>
+                Preview image
+                <br/>
                 <img src={widget.href}
                      alt="Your image preview" width={WIDTH}></img>
             </div>
