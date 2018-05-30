@@ -5,7 +5,7 @@ import {HEADING, IMAGE, LIST, PARAGRAPH} from "../constants/widgetType";
 import {HeadingContainer} from "../component/headingWidget"
 import {ParagraphContainer} from "../component/paragraph"
 import {List} from "../component/listWidget"
-import {Image} from "../component/imageWidget"
+import {ImageContainer} from "../component/imageWidget"
 
 
 
@@ -45,7 +45,7 @@ export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
                 {widget.widgetType=== HEADING && <HeadingContainer widget={widget}/>}
                 {widget.widgetType=== PARAGRAPH && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType=== LIST && <List/>}
-                {widget.widgetType=== IMAGE && <Image/>}
+                {widget.widgetType=== IMAGE && <ImageContainer widget={widget}/>}
             </div>
         </li>
     </div>

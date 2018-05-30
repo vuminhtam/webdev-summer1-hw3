@@ -8,7 +8,7 @@ export const Paragraph = ({inPreviewMode, widget, textChanged}) => {
         <div>
             <div>
                 <textarea
-                    placeholder="Heading text"
+                    placeholder="Paragraph text"
                     ref={node => inputElem = node}
                     value={widget.text}
                     onChange={() => textChanged(widget.id, inputElem.value)}></textarea>

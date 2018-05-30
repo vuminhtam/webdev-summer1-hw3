@@ -4,7 +4,7 @@ import {
     FIND_ALL_WIDGETS,
     HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED, PREVIEW,
     SAVE,
-    SELECT_WIDGET_TYPE
+    SELECT_WIDGET_TYPE, RENDER_IMG_URL, DEFAULT_IMG_URL
 } from "../constants";
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH} from "../constants/widgetType";
@@ -76,6 +76,16 @@ export const widgetReducer = (state = initialState, action) => {
             cloneState = Object.assign({}, state)
             cloneState.preview = !state.preview
             return cloneState
+
+        case RENDER_IMG_URL:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.href = action.href
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
         default:
             return state
     }

@@ -34,3 +34,12 @@ export const headingTextChanged = (dispatch, wid, newText) => (
 export const preview = dispatch => {
     dispatch({type: constants.PREVIEW})
 }
+
+export const renderImgURL = (dispatch, id, url) => {
+    console.log(url)
+    return(
+        dispatch({
+        type: constants.RENDER_IMG_URL,
+        id: id,
+        href: url}))
+}
