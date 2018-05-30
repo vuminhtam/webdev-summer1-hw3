@@ -1,12 +1,12 @@
 import React from 'react'
 import {DELETE_WIDGET, SELECT_WIDGET_TYPE} from "../constants";
 import {connect} from 'react-redux'
-import {HEADING, IMAGE, LIST, PARAGRAPH} from "../constants/widgetType";
+import {HEADING, IMAGE, LINKTEXT, LIST, PARAGRAPH} from "../constants/widgetType";
 import {HeadingContainer} from "../component/headingWidget"
 import {ParagraphContainer} from "../component/paragraph"
 import {List} from "../component/listWidget"
 import {ImageContainer} from "../component/imageWidget"
-
+import {LinkTextContainer} from "./linkText";
 
 
 export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
@@ -26,10 +26,11 @@ export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
                                 id: widget.id,
                                 widgetType: selectElement.value
                             }))}>
-                    <option>Heading</option>
-                    <option>Paragraph</option>
-                    <option>List</option>
-                    <option>Image</option>
+                    <option>{HEADING}</option>
+                    <option>{PARAGRAPH}</option>
+                    <option>{LIST}</option>
+                    <option>{IMAGE}</option>
+                    <option>{LINKTEXT}</option>
                 </select>
                 <button onClick={e => (
                     dispatch(
@@ -46,6 +47,7 @@ export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
                 {widget.widgetType=== PARAGRAPH && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType=== LIST && <List/>}
                 {widget.widgetType=== IMAGE && <ImageContainer widget={widget}/>}
+                {widget.widgetType=== LINKTEXT && <LinkTextContainer widget={widget}/>}
             </div>
         </li>
     </div>

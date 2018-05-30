@@ -36,7 +36,6 @@ export const preview = dispatch => {
 }
 
 export const renderImgURL = (dispatch, id, url) => {
-    console.log(url)
     return(
         dispatch({
         type: constants.RENDER_IMG_URL,
