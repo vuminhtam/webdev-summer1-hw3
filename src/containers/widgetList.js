@@ -41,8 +41,13 @@ class WidgetList extends React.Component {
                     </ul>
                 </div>
 
+                <div className="btn-group btn-group-lg" role="group" aria-label="Basic example">
                 <button
-                    onClick={this.props.addWidget}>Add</button>
+                    class="btn-primary"
+                    onClick={this.props.addWidget}>
+                    <i className="fas fa-plus"></i> Add Widget
+                </button>
+                </div>
             </div>
         )
     }

@@ -2,16 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7844fc80-5490-4cea-94f0-9dbce6907559" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/headingWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/headingWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/imageWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/imageWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/linkText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/linkText.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/listWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/listWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/paragraph.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/paragraph.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/component/widgetItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/component/widgetItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/containers/widgetList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/widgetList.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -29,8 +19,8 @@
       <file leaf-file-name="widgetList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/containers/widgetList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+            <state relative-caret-position="256">
+              <caret line="47" column="62" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
               <folding>
                 <element signature="e#0#68#0" expanded="true" />
               </folding>
@@ -198,7 +188,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="434" />
     <option name="y" value="23" />
     <option name="width" value="1006" />
@@ -313,12 +303,12 @@
       <updated>1527191011862</updated>
       <workItem from="1527191013358" duration="899000" />
       <workItem from="1527314975648" duration="13002000" />
-      <workItem from="1527578231695" duration="26096000" />
+      <workItem from="1527578231695" duration="26324000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39997000" />
+    <option name="totallyTimeSpent" value="40225000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="434" y="23" width="1006" height="812" extended-state="0" />
@@ -579,8 +569,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/containers/widgetList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="26" column="48" selection-start-line="26" selection-start-column="48" selection-end-line="26" selection-end-column="48" />
+        <state relative-caret-position="256">
+          <caret line="47" column="62" selection-start-line="47" selection-start-column="62" selection-end-line="47" selection-end-column="62" />
           <folding>
             <element signature="e#0#68#0" expanded="true" />
           </folding>
