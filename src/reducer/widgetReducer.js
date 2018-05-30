@@ -37,7 +37,8 @@ export const widgetReducer = (state = initialState, action) => {
                         text: '',
                         widgetType: HEADING,
                         size: 1,
-                        listType: UNORDERED_LIST
+                        listType: UNORDERED_LIST,
+                        widget_order: state.widgets.length + 1
                     }
                 ]
             cloneState.widgets = newWidgets
@@ -61,6 +62,7 @@ export const widgetReducer = (state = initialState, action) => {
             return state
 
         case SELECT_WIDGET_TYPE:
+            console.log(action.widgetType)
             newWidgets = state.widgets.filter((widget) => {
                 if(widget.id === action.id) {
                     widget.widgetType = action.widgetType

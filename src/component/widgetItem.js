@@ -12,22 +12,9 @@ import {LinkTextContainer} from "./linkText";
 export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => {
     let selectElement
     return (
-        <div className="card bg-light mb-3">
+        <div className={setBorder(inPreviewMode, editingWidget, widget)}>
         <li>
-            <div class="text-left">
-                Widget name: {widget.widget_order}
-                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                <button onClick={e => (
-                    dispatch(
-                        {type: MOVE_WIDGET_UP, id: widget.id, order: widget.widget_order})
-                )}>Up</button>
-                    <button onClick={e => (
-                        dispatch(
-                            {type: MOVE_WIDGET_DOWN, id: widget.id, order: widget.widget_order})
-                    )}>Down</button>
-                </div>
-            </div>
-            <div class="text-right">
+            <div class="text-right" role="toolbar">
 
                 <button
                     hidden={!(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
@@ -37,17 +24,29 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                         {type: SELECT_EDIT, id: widget.id})
                 )}> <i className="fas fa-pencil-alt"></i>
                 </button>
-                <button
-                    hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
-                    className="btn btn-danger"
-                    onClick={e => (
-                        dispatch({type: DELETE_WIDGET, id: widget.id})
-                    )}><i className="fas fa-times"></i>
-                </button>
 
-            </div>
-            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
-                <select
+                <div className="input-group mb-3"
+                     hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}>
+
+                    <button
+                        className="btn btn-light"
+                        hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
+                        onClick={e => (
+                            dispatch(
+                                {type: MOVE_WIDGET_UP, id: widget.id, order: widget.widget_order})
+                        )}><i className="fas fa-arrow-circle-up"></i>
+                    </button>
+
+                    <button
+                        className="btn btn-light"
+                        hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
+                        onClick={e => (
+                            dispatch(
+                                {type: MOVE_WIDGET_DOWN, id: widget.id, order: widget.widget_order})
+                        )}><i className="fas fa-arrow-circle-down"></i>
+                    </button>
+                    <select
+                    className="custom-select"
                     value={widget.widgetType}
                     ref={node => selectElement = node}
                     onChange={e => (
@@ -60,6 +59,25 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                     <option>{IMAGE}</option>
                     <option>{LINKTEXT}</option>
                 </select>
+                    <div className="input-group-append">
+                    <label className="input-group-text" htmlFor="inputGroupSelect02">
+                        Widget #{widget.widget_order}
+                    </label>
+                    </div>
+
+                    <button
+                        hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
+                        className="btn btn-danger"
+                        onClick={e => (
+                            dispatch({type: DELETE_WIDGET, id: widget.id})
+                        )}><i className="fas fa-times"></i>
+                    </button>
+                </div>
+
+
+
+            </div>
+            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
 
                 <div className="card-header">
                     <h5 >{widget.widgetType} widget</h5>
@@ -76,6 +94,14 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
         </li>
     </div>
     )
+}
+
+const setBorder = (inPreviewMode, editingWidget, widget) => {
+    if(inPreviewMode || (editingWidget != null && widget.id != editingWidget)) {
+        return "card mb-3"
+    } else {
+        return "card mb-3 border-left-0 border-right-0 border-secondary"
+    }
 }
 
 export const stateMapper = (state) => (

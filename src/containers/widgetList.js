@@ -57,7 +57,7 @@ const setPreviewText = (inMode) => {
     if(!inMode) {
         return <i className="far fa-eye"></i>
     } else {
-        return <i className="fas fa-chevron-left"></i>
+        return <i className="fas fa-chevron-left"> Edit all </i>
     }
 }
 
