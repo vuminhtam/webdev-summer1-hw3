@@ -26,7 +26,7 @@ export const widgetReducer = (state = initialState, action) => {
                     ...state.widgets,
                     {
                         id: state.widgets.length + 1,
-                        text: 'New content',
+                        text: '',
                         widgetType: HEADING,
                         size: 1
                     }

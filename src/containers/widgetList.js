@@ -25,10 +25,13 @@ class WidgetList extends React.Component {
                 <ul>
                     {this.props.widgets.map(widget => (
                         <WidgetContainer widget={widget}
-                                         key={widget.id}/>
+                                         key={widget.id}
+                                         inPreviewMode={this.props.inPreviewMode}/>
                     ))}
                 </ul>
-                <button onClick={this.props.addWidget}>Add</button>
+                <button
+                    hidden={this.props.inPreviewMode}
+                    onClick={this.props.addWidget}>Add</button>
             </div>
         )
     }
