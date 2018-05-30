@@ -44,6 +44,11 @@ export const widgetReducer = (state = initialState, action) => {
             }
 
         case SAVE:
+            var order = 0;
+            state.widgets.map((widget) => {
+                widget.widget_order = order;
+                order = order + 1;
+            })
             widgetService.save(state.widgets)
             return state
 

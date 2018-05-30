@@ -15,6 +15,7 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
         <div className="card bg-light mb-3">
         <li>
             <div class="text-right">
+                {widget.widget_order}
                 <button
                     hidden={!(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
                     className="btn btn-warning"

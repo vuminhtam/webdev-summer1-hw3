@@ -6,7 +6,11 @@ export const findAllWidgets = dispatch => {
     widgetService.findAllWidgets()
         .then(widgets => dispatch({
             type: constants.FIND_ALL_WIDGETS,
-            widgets: widgets }))
+            widgets: sortWidget(widgets)}))
+}
+
+export const sortWidget = (widgets) => {
+    return widgets.sort(function(a,b) {return a.widget_order - b.widget_order})
 }
 
 export const addWidget = dispatch => {

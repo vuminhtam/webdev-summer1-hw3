@@ -22,6 +22,7 @@ class WidgetService {
     }
 
     save(overrideList) {
+        console.log(overrideList)
         return fetch(WIDGET_API + '/save', {
             method: 'post',
             body: JSON.stringify(overrideList),
