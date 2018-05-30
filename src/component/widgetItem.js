@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {HEADING, IMAGE, LINKTEXT, LIST, PARAGRAPH} from "../constants/widgetType";
 import {HeadingContainer} from "../component/headingWidget"
 import {ParagraphContainer} from "../component/paragraph"
-import {List} from "../component/listWidget"
+import {ListContainer} from "../component/listWidget"
 import {ImageContainer} from "../component/imageWidget"
 import {LinkTextContainer} from "./linkText";
 
@@ -45,7 +45,7 @@ export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
             <div>
                 {widget.widgetType=== HEADING && <HeadingContainer widget={widget}/>}
                 {widget.widgetType=== PARAGRAPH && <ParagraphContainer widget={widget}/>}
-                {widget.widgetType=== LIST && <List/>}
+                {widget.widgetType=== LIST && <ListContainer widget={widget}/>}
                 {widget.widgetType=== IMAGE && <ImageContainer widget={widget}/>}
                 {widget.widgetType=== LINKTEXT && <LinkTextContainer widget={widget}/>}
             </div>

@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {WIDTH} from "../constants";
 
 export const Image = ({inPreviewMode, widget, renderImgURL}) => {
-    console.log(widget)
     let inputElem
     return (
         <div>

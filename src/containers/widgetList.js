@@ -12,9 +12,7 @@ class WidgetList extends React.Component {
     render() {
         return(
             <div>
-                <img src="https://goo.gl/images/5UTfWW" alt="Your image preview"></img>
-
-                <h1>Widget List {this.props.widgets.length}</h1>
+                <h1>LESSON EDITOR</h1>
 
                 <button hidden={this.props.inPreviewMode}
                         onClick={this.props.save}>
