@@ -17,7 +17,7 @@ import {
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH, UNORDERED_LIST} from "../constants/widgetType";
 
-let initialState = {widgets: [], preview: true, editingWidget: null}
+let initialState = {widgets: [], preview: true, editingWidget: null, canSave: true}
 
 const widgetService = WidgetService.instance
 
@@ -55,6 +55,10 @@ export const widgetReducer = (state = initialState, action) => {
             }
 
         case SAVE:
+            if(!state.canSave) {
+                alert('Cannot save')
+                return state
+            }
             var order = 0;
             state.widgets.map((widget) => {
                 widget.widget_order = order;
@@ -140,15 +144,30 @@ export const widgetReducer = (state = initialState, action) => {
             return JSON.parse(JSON.stringify(cloneState))
 
         case WIDGET_NAME_CHANGED:
-            newWidgets = state.widgets.map(widget => {
-                if (widget.id === action.id) {
-                    widget.name = action.name
+            var found = false
+            state.widgets.map(widget => {
+                if (widget.name === action.name && widget.id != action.id) {
+                    found = true
+                    cloneState.canSave = false;
+                    cloneState.foundName = widget.id
+                    alert('Widget name ' + action.name + ' in use')
+                    return found
                 }
-                return Object.assign({}, widget)
             })
-            cloneState.widgets = newWidgets
-            return cloneState
-
+            if(found) {
+                return cloneState
+            }
+            else {
+                newWidgets = state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.name = action.name
+                    }
+                    return Object.assign({}, widget)
+                })
+                cloneState.canSave = true
+                cloneState.widgets = newWidgets
+                return cloneState
+            }
         default:
             return state
     }

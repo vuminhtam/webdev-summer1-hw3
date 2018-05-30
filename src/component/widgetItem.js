@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+    CHECK_CONTAIN_NAME,
     DELETE_WIDGET,
     MOVE_WIDGET_DOWN,
     MOVE_WIDGET_UP, SAVE,
@@ -90,18 +91,14 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                     <div
                         hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}>
                         <button className="btn btn-success"
-                                onClick={e => (
-                                    dispatch(
-                                        {type: SAVE})
-                                )}>
+                                onClick={() => (dispatch({type: SAVE}))}>
                             <i className="far fa-save"></i>
                         </button>
 
                         <button
                             className="btn btn-danger"
-                            onClick={e => (
-                                dispatch({type: DELETE_WIDGET, id: widget.id})
-                            )}><i className="fas fa-times"></i>
+                            onClick={e => (dispatch({type: DELETE_WIDGET, id: widget.id}))}>
+                            <i className="fas fa-times"></i>
                         </button>
                     </div>
                 </div>
@@ -127,6 +124,7 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
     </div>
     )
 }
+
 
 const setBorder = (inPreviewMode, editingWidget, widget) => {
     if(inPreviewMode || (editingWidget != null && widget.id != editingWidget)) {
