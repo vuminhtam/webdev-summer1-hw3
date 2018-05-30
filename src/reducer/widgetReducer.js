@@ -12,7 +12,7 @@ import {
     LIST_TYPE_CHANGED,
     SELECT_EDIT,
     MOVE_WIDGET_UP,
-    MOVE_WIDGET_DOWN
+    MOVE_WIDGET_DOWN, WIDGET_NAME_CHANGED
 } from "../constants";
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH, UNORDERED_LIST} from "../constants/widgetType";
@@ -59,13 +59,11 @@ export const widgetReducer = (state = initialState, action) => {
             state.widgets.map((widget) => {
                 widget.widget_order = order;
                 order = order + 1;
-                widget.name = 'Widget #' + (widget.widget_order + 1)
             })
             widgetService.save(state.widgets)
             return state
 
         case SELECT_WIDGET_TYPE:
-            console.log(action.widgetType)
             newWidgets = state.widgets.filter((widget) => {
                 if(widget.id === action.id) {
                     widget.widgetType = action.widgetType
@@ -141,6 +139,15 @@ export const widgetReducer = (state = initialState, action) => {
             cloneState.widgets = newWidgets
             return JSON.parse(JSON.stringify(cloneState))
 
+        case WIDGET_NAME_CHANGED:
+            newWidgets = state.widgets.map(widget => {
+                if (widget.id === action.id) {
+                    widget.name = action.name
+                }
+                return Object.assign({}, widget)
+            })
+            cloneState.widgets = newWidgets
+            return cloneState
 
         default:
             return state

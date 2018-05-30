@@ -1,5 +1,12 @@
 import React from 'react'
-import {DELETE_WIDGET, MOVE_WIDGET_DOWN, MOVE_WIDGET_UP, SELECT_EDIT, SELECT_WIDGET_TYPE} from "../constants";
+import {
+    DELETE_WIDGET,
+    MOVE_WIDGET_DOWN,
+    MOVE_WIDGET_UP,
+    SELECT_EDIT,
+    SELECT_WIDGET_TYPE,
+    WIDGET_NAME_CHANGED
+} from "../constants";
 import {connect} from 'react-redux'
 import {HEADING, IMAGE, LINKTEXT, LIST, PARAGRAPH} from "../constants/widgetType";
 import {HeadingContainer} from "../component/headingWidget"
@@ -12,6 +19,7 @@ import {LinkTextContainer} from "./linkText";
 export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => {
     let selectElement
     let widgetName = widget.name
+    let inputName
     return (
         <div title={widgetName}
             className={setBorder(inPreviewMode, editingWidget, widget)}>
@@ -63,9 +71,21 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                     <option>{LINKTEXT}</option>
                 </select>
                     <div className="input-group-append">
-                    <label className="input-group-text" htmlFor="inputGroupSelect02">
-                        {widgetName}
+                    <label
+                        className="input-group-text" htmlFor="widgetNameInput">
+                        Name
                     </label>
+                        <input
+                            className="widgetNameInput"
+                            ref={node => inputName = node}
+                            onChange={e => (
+                                dispatch(
+                                    {type: WIDGET_NAME_CHANGED, id: widget.id, name: inputName.value})
+                            )}
+                            type="text"
+                            className="form-control"
+                            defaultValue={widgetName}>
+                        </input>
                     </div>
 
                     <button
