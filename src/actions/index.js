@@ -42,3 +42,10 @@ export const renderImgURL = (dispatch, id, url) => {
         id: id,
         href: url}))
 }
+
+export const listTypeChanged = (dispatch, id, newType) => (
+    dispatch({
+        type: constants.LIST_TYPE_CHANGED,
+        id: id,
+        listType: newType})
+)

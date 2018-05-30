@@ -4,10 +4,10 @@ import {
     FIND_ALL_WIDGETS,
     HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED, PREVIEW,
     SAVE,
-    SELECT_WIDGET_TYPE, RENDER_IMG_URL, DEFAULT_IMG_URL
+    SELECT_WIDGET_TYPE, RENDER_IMG_URL, DEFAULT_IMG_URL, LIST_TYPE_CHANGED
 } from "../constants";
 import WidgetService from "../service/widgetService";
-import {HEADING, PARAGRAPH} from "../constants/widgetType";
+import {HEADING, PARAGRAPH, UNORDERED_LIST} from "../constants/widgetType";
 
 let initialState = {widgets: [], preview: false}
 
@@ -28,7 +28,8 @@ export const widgetReducer = (state = initialState, action) => {
                         id: state.widgets.length + 1,
                         text: '',
                         widgetType: HEADING,
-                        size: 1
+                        size: 1,
+                        listType: UNORDERED_LIST
                     }
                 ]
             }
@@ -82,6 +83,16 @@ export const widgetReducer = (state = initialState, action) => {
                 widgets: state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.href = action.href
+                    }
+                    return Object.assign({}, widget)
+                })
+            }
+
+        case LIST_TYPE_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if (widget.id === action.id) {
+                        widget.listType = action.listType
                     }
                     return Object.assign({}, widget)
                 })

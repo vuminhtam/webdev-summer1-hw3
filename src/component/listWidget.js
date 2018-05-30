@@ -1,9 +1,11 @@
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
+import {ORDERED_LIST, UNORDERED_LIST} from "../constants/widgetType";
 
-export const List = ({inPreviewMode, widget, textChanged}) => {
+export const List = ({inPreviewMode, widget, textChanged, listTypeChanged}) => {
     let inputElem
+    let listType
     return (
         <div>
             <div>
@@ -12,11 +14,23 @@ export const List = ({inPreviewMode, widget, textChanged}) => {
                     ref={node => inputElem = node}
                     defaultValue={widget.text}
                     onChange={() => textChanged(widget.id, inputElem.value)}></textarea>
+                <br/>
+                <select
+                    ref={node => listType = node}
+                    onChange={() => listTypeChanged(widget.id, listType.value)}>
+                    <option>Unordered list</option>
+                    <option>Ordered list</option>
+                </select>
             </div>
 
-            <ol>
-                {textToHTML(widget.text)}
-            </ol>
+            <div>
+                Preview
+                {widget.listType == ORDERED_LIST && <ol>{textToHTML(widget.text)}</ol>}
+                {widget.listType == UNORDERED_LIST && <ul>{textToHTML(widget.text)}</ul>}
+            </div>
+            {/*<ul>*/}
+                {/*{textToHTML(widget.text)}*/}
+            {/*</ul>*/}
         </div>
     )
 }
@@ -30,7 +44,8 @@ export const textToHTML = (text) => {
 }
 
 const dispatchMapper = dispatch => ({
-    textChanged: (id, text) => actions.headingTextChanged(dispatch, id, text)
+    textChanged: (id, text) => actions.headingTextChanged(dispatch, id, text),
+    listTypeChanged: (id, type) => actions.listTypeChanged(dispatch, id, type)
 })
 
 const stateMapper = state => ({
