@@ -2,12 +2,12 @@ import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
 
-export const LinkText = ({inPreviewMode, widget, renderImgURL, headingTextChanged}) => {
+export const LinkText = ({inPreviewMode, editingWidget, widget, renderImgURL, headingTextChanged}) => {
     let inputText
     let inputUrl
     return (
         <div>
-            <div hidden={inPreviewMode}>
+            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
                 <input
                     placeholder="Link text"
                     ref={node => inputText = node}
@@ -37,8 +37,8 @@ const dispatchMapper = dispatch => ({
     headingTextChanged: (wid, text) => actions.headingTextChanged(dispatch, wid, text)
 })
 
-const stateMapper = state => ({
-    inPreviewMode: state.preview
-})
+const stateMapper = (state) => (
+    {inPreviewMode: state.preview, editingWidget: state.editingWidget}
+)
 
 export const LinkTextContainer = connect(stateMapper, dispatchMapper)(LinkText)

@@ -3,12 +3,12 @@ import * as actions from "../actions";
 import {connect} from 'react-redux'
 
 
-export const Heading = ({inPreviewMode, widget, headingSizeChanged, headingTextChanged}) => {
+export const Heading = ({inPreviewMode, editingWidget, widget, headingSizeChanged, headingTextChanged}) => {
     let selectElem
     let inputElem
     return (
         <div>
-            <div hidden={inPreviewMode}>
+            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
                 <input
                     placeholder="Heading text"
                     ref={node => inputElem = node}
@@ -38,8 +38,8 @@ const headingDispatchMapper = dispatch => ({
     headingTextChanged: (wid, text) => actions.headingTextChanged(dispatch, wid, text)
 })
 
-const headingStateMapper = state => ({
-    inPreviewMode: state.preview
-})
+const stateMapper = (state) => (
+    {inPreviewMode: state.preview, editingWidget: state.editingWidget}
+)
 
-export const HeadingContainer = connect(headingStateMapper, headingDispatchMapper)(Heading)
+export const HeadingContainer = connect(stateMapper, headingDispatchMapper)(Heading)

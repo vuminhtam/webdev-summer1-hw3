@@ -3,12 +3,12 @@ import * as actions from '../actions'
 import {connect} from 'react-redux'
 import {ORDERED_LIST, UNORDERED_LIST} from "../constants/widgetType";
 
-export const List = ({inPreviewMode, widget, textChanged, listTypeChanged}) => {
+export const List = ({inPreviewMode, editingWidget, widget, textChanged, listTypeChanged}) => {
     let inputElem
     let listType
     return (
         <div>
-            <div hidden={inPreviewMode}>
+            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
                 <textarea
                     placeholder="Enter one list item per line"
                     ref={node => inputElem = node}
@@ -45,8 +45,8 @@ const dispatchMapper = dispatch => ({
     listTypeChanged: (id, type) => actions.listTypeChanged(dispatch, id, type)
 })
 
-const stateMapper = state => ({
-    inPreviewMode: state.preview
-})
+const stateMapper = (state) => (
+    {inPreviewMode: state.preview, editingWidget: state.editingWidget}
+)
 
 export const ListContainer = connect(stateMapper, dispatchMapper)(List)

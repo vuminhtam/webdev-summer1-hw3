@@ -3,11 +3,11 @@ import * as actions from '../actions'
 import {connect} from 'react-redux'
 import {WIDTH} from "../constants";
 
-export const Image = ({inPreviewMode, widget, renderImgURL}) => {
+export const Image = ({inPreviewMode, editingWidget, widget, renderImgURL}) => {
     let inputElem
     return (
         <div>
-            <div hidden={inPreviewMode}>
+            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
                 <input
                 placeholder="Image URL"
                 ref={node => inputElem = node}
@@ -31,8 +31,8 @@ const dispatchMapper = dispatch => ({
     renderImgURL: (id, url) => actions.renderImgURL(dispatch, id, url)
 })
 
-const stateMapper = state => ({
-    inPreviewMode: state.preview
-})
+const stateMapper = (state) => (
+    {inPreviewMode: state.preview, editingWidget: state.editingWidget}
+)
 
 export const ImageContainer = connect(stateMapper, dispatchMapper)(Image)

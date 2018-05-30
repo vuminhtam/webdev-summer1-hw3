@@ -1,5 +1,5 @@
 import React from 'react'
-import {DELETE_WIDGET, SELECT_WIDGET_TYPE} from "../constants";
+import {DELETE_WIDGET, SELECT_EDIT, SELECT_WIDGET_TYPE} from "../constants";
 import {connect} from 'react-redux'
 import {HEADING, IMAGE, LINKTEXT, LIST, PARAGRAPH} from "../constants/widgetType";
 import {HeadingContainer} from "../component/headingWidget"
@@ -9,12 +9,18 @@ import {ImageContainer} from "../component/imageWidget"
 import {LinkTextContainer} from "./linkText";
 
 
-export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
+export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => {
     let selectElement
     return (
         <div>
         <li>
-            <div hidden={inPreviewMode}>
+            <button onClick={e => (
+                dispatch(
+                    {type: SELECT_EDIT, id: widget.id})
+            )}>Edit
+            </button>
+
+            <div hidden={inPreviewMode || (editingWidget != null && widget.id != editingWidget)}>
                 {widget.widgetType} widget
                 <select
                     value={widget.widgetType}
@@ -32,12 +38,9 @@ export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
                     <option>{IMAGE}</option>
                     <option>{LINKTEXT}</option>
                 </select>
+
                 <button onClick={e => (
-                    dispatch(
-                        {
-                            type: DELETE_WIDGET,
-                            id: widget.id
-                        })
+                    dispatch({type: DELETE_WIDGET, id: widget.id})
                 )}>Delete
                 </button>
             </div>
@@ -49,13 +52,15 @@ export const WidgetItem = ({inPreviewMode, widget, dispatch}) => {
                 {widget.widgetType=== IMAGE && <ImageContainer widget={widget}/>}
                 {widget.widgetType=== LINKTEXT && <LinkTextContainer widget={widget}/>}
             </div>
+            <hr/>
         </li>
     </div>
     )
 }
 
-const widgetStateMapper = (state) => (
-    {inPreviewMode: state.preview}
+export const stateMapper = (state) => (
+    {inPreviewMode: state.preview,
+    editingWidget: state.editingWidget}
 )
 
-export const WidgetContainer = connect(widgetStateMapper)(WidgetItem)
+export const WidgetContainer = connect(stateMapper)(WidgetItem)

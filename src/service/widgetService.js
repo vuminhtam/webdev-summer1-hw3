@@ -27,6 +27,6 @@ class WidgetService {
             body: JSON.stringify(overrideList),
             headers: {
                 'content-type': 'application/json'}
-        })
+        }).then(() => alert('Changes saved!'))
     }
 }

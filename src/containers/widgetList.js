@@ -40,7 +40,8 @@ class WidgetList extends React.Component {
 
 export const stateMapper = (state) => (
     {widgets: state.widgets,
-    inPreviewMode: state.preview}
+    inPreviewMode: state.preview,
+    editingWidget: null}
 )
 
 export const dispatchMapper = dispatch => ({

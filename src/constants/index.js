@@ -14,3 +14,6 @@ export const NOT_FOUND_URL = 'http://www.gardensbythebay.com.sg/etc/designs/gbb/
 export const DEFAULT_IMG_URL = 'https://www.themelocation.com/wp-content/uploads/2015/01/woocommerce113.jpg'
 
 export const WIDTH = 200
+
+
+export const SELECT_EDIT = 'SELECT_EDIT'

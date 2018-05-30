@@ -4,7 +4,7 @@ import {
     FIND_ALL_WIDGETS,
     HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED, PREVIEW,
     SAVE,
-    SELECT_WIDGET_TYPE, RENDER_IMG_URL, DEFAULT_IMG_URL, LIST_TYPE_CHANGED
+    SELECT_WIDGET_TYPE, RENDER_IMG_URL, DEFAULT_IMG_URL, LIST_TYPE_CHANGED, SELECT_EDIT
 } from "../constants";
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH, UNORDERED_LIST} from "../constants/widgetType";
@@ -97,6 +97,11 @@ export const widgetReducer = (state = initialState, action) => {
                     return Object.assign({}, widget)
                 })
             }
+
+        case SELECT_EDIT:
+            cloneState = Object.assign({}, state)
+            cloneState.editingWidget = action.id
+            return cloneState
         default:
             return state
     }
