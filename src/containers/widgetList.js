@@ -1,4 +1,4 @@
-import {addWidget, findAllWidgets, save, preview} from "../actions";
+import {addWidget, findAllWidgets, save, preview, findAllWidgetsByLessonID} from "../actions";
 import React from "react";
 import {connect } from 'react-redux'
 import {WidgetContainer} from "../component/widgetItem";
@@ -8,8 +8,9 @@ export default
 class WidgetList extends React.Component {
     constructor(props) {
         super(props)
-        this.props.findAllWidgets()
+        this.props.findAllWidgetsByLessonID(this.props.match.params.tid)
     }
+
     render() {
         return(
             <div>
@@ -70,6 +71,7 @@ export const stateMapper = (state) => (
 
 export const dispatchMapper = dispatch => ({
     findAllWidgets: () => findAllWidgets(dispatch),
+    findAllWidgetsByLessonID: (id) => findAllWidgetsByLessonID(id, dispatch),
     addWidget: () => addWidget(dispatch),
     save: () => save(dispatch),
     preview: () => preview(dispatch)

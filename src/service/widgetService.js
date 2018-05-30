@@ -2,6 +2,8 @@ let _singleton = Symbol();
 const REMOTE_URL = 'https://webdev-summer1-2018-tamvu.herokuapp.com'
 const LOCAL_URL = 'http://localhost:8080'
 const WIDGET_API = REMOTE_URL + '/api/widget'
+const TOPIC_WIDGET_API = REMOTE_URL + '/api/topic/TID/widget'
+
 
 export default
 class WidgetService {
@@ -19,6 +21,13 @@ class WidgetService {
 
     findAllWidgets() {
         return fetch(WIDGET_API)
+            .then(response => (response.json()))
+    }
+
+    findAllWidgetsByTopicID(tid) {
+        // var url = TOPIC_WIDGET_API.replace('TID', tid)
+        console.log(tid)
+        return fetch(TOPIC_WIDGET_API.replace('TID', tid))
             .then(response => (response.json()))
     }
 

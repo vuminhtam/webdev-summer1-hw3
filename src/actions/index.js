@@ -9,6 +9,13 @@ export const findAllWidgets = dispatch => {
             widgets: sortWidget(widgets)}))
 }
 
+export const findAllWidgetsByLessonID = (lid, dispatch) => {
+    widgetService.findAllWidgetsByTopicID(lid)
+        .then(widgets => dispatch({
+            type: constants.FIND_ALL_WIDGETS,
+            widgets: sortWidget(widgets)}))
+}
+
 export const sortWidget = (widgets) => {
     return widgets.sort(function(a,b) {return a.widget_order - b.widget_order})
 }
