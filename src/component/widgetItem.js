@@ -1,5 +1,5 @@
 import React from 'react'
-import {DELETE_WIDGET, SELECT_EDIT, SELECT_WIDGET_TYPE} from "../constants";
+import {DELETE_WIDGET, MOVE_WIDGET_DOWN, MOVE_WIDGET_UP, SELECT_EDIT, SELECT_WIDGET_TYPE} from "../constants";
 import {connect} from 'react-redux'
 import {HEADING, IMAGE, LINKTEXT, LIST, PARAGRAPH} from "../constants/widgetType";
 import {HeadingContainer} from "../component/headingWidget"
@@ -14,8 +14,21 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
     return (
         <div className="card bg-light mb-3">
         <li>
+            <div class="text-left">
+                Widget name: {widget.widget_order}
+                <div className="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <button onClick={e => (
+                    dispatch(
+                        {type: MOVE_WIDGET_UP, id: widget.id, order: widget.widget_order})
+                )}>Up</button>
+                    <button onClick={e => (
+                        dispatch(
+                            {type: MOVE_WIDGET_DOWN, id: widget.id, order: widget.widget_order})
+                    )}>Down</button>
+                </div>
+            </div>
             <div class="text-right">
-                {widget.widget_order}
+
                 <button
                     hidden={!(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
                     className="btn btn-warning"
@@ -25,6 +38,7 @@ export const WidgetItem = ({inPreviewMode, editingWidget, widget, dispatch}) => 
                 )}> <i className="fas fa-pencil-alt"></i>
                 </button>
                 <button
+                    hidden={(inPreviewMode || (editingWidget != null && widget.id != editingWidget))}
                     className="btn btn-danger"
                     onClick={e => (
                         dispatch({type: DELETE_WIDGET, id: widget.id})

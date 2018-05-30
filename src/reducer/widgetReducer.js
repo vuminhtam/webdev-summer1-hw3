@@ -2,9 +2,17 @@ import {
     ADD_WIDGET,
     DELETE_WIDGET,
     FIND_ALL_WIDGETS,
-    HEADING_SIZE_CHANGED, HEADING_TEXT_CHANGED, PREVIEW,
+    HEADING_SIZE_CHANGED,
+    HEADING_TEXT_CHANGED,
+    PREVIEW,
     SAVE,
-    SELECT_WIDGET_TYPE, RENDER_IMG_URL, DEFAULT_IMG_URL, LIST_TYPE_CHANGED, SELECT_EDIT
+    SELECT_WIDGET_TYPE,
+    RENDER_IMG_URL,
+    DEFAULT_IMG_URL,
+    LIST_TYPE_CHANGED,
+    SELECT_EDIT,
+    MOVE_WIDGET_UP,
+    MOVE_WIDGET_DOWN
 } from "../constants";
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH, UNORDERED_LIST} from "../constants/widgetType";
@@ -111,7 +119,34 @@ export const widgetReducer = (state = initialState, action) => {
             cloneState.editingWidget = action.id
             cloneState.preview = false
             return cloneState
+
+        case MOVE_WIDGET_UP:
+            newWidgets = cloneState.widgets
+            if(action.order > 0) {
+                swap(newWidgets, action.order, action.order - 1)
+            }
+            cloneState.widgets = newWidgets
+            return JSON.parse(JSON.stringify(cloneState))
+
+        case MOVE_WIDGET_DOWN:
+            newWidgets = cloneState.widgets
+            if(action.order < newWidgets.length - 1) {
+                swap(newWidgets, action.order, action.order + 1)
+            }
+            cloneState.widgets = newWidgets
+            return JSON.parse(JSON.stringify(cloneState))
+
+
         default:
             return state
     }
+}
+
+const swap = (v, i, j) => {
+    var temp = v[i]
+    v[i] = v[j]
+    v[i].widget_order = i
+    v[j] = temp
+    v[j].widget_order = j
+    return v
 }
