@@ -9,20 +9,20 @@ import {
 import WidgetService from "../service/widgetService";
 import {HEADING, PARAGRAPH, UNORDERED_LIST} from "../constants/widgetType";
 
-let initialState = {widgets: [], preview: false}
+let initialState = {widgets: [], preview: true, editingWidget: null}
 
 const widgetService = WidgetService.instance
 
 export const widgetReducer = (state = initialState, action) => {
-    let cloneState
+    let cloneState = Object.assign({}, state)
+    let newWidgets
     switch (action.type) {
         case FIND_ALL_WIDGETS:
-            return {
-                widgets: action.widgets
-            }
+            cloneState.widgets = action.widgets
+            return cloneState
         case ADD_WIDGET:
-            return {
-                widgets : [
+            var newId = state.widgets.length + 1
+            newWidgets =[
                     ...state.widgets,
                     {
                         id: state.widgets.length + 1,
@@ -32,75 +32,79 @@ export const widgetReducer = (state = initialState, action) => {
                         listType: UNORDERED_LIST
                     }
                 ]
-            }
+            cloneState.widgets = newWidgets
+            cloneState.preview = false
+            cloneState.editingWidget = newId
+            return cloneState
         case DELETE_WIDGET:
             return {
                 widgets: state.widgets.filter(widget => (
                     widget.id !== action.id
                 ))
             }
+
         case SAVE:
             widgetService.save(state.widgets)
             return state
+
         case SELECT_WIDGET_TYPE:
-            let newState = {
-                widgets: state.widgets.filter((widget) => {
-                    if(widget.id === action.id) {
-                        widget.widgetType = action.widgetType
-                    }
-                    return true;
-                })
-            }
-            return JSON.parse(JSON.stringify(newState))
+            newWidgets = state.widgets.filter((widget) => {
+                if(widget.id === action.id) {
+                    widget.widgetType = action.widgetType
+                }
+                return true;
+            })
+            cloneState.widgets = newWidgets
+            return JSON.parse(JSON.stringify(cloneState))
 
         case HEADING_SIZE_CHANGED:
-            return {
-                widgets: state.widgets.map(widget => {
+            newWidgets = state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.size = action.size
                     }
                     return Object.assign({}, widget)
                 })
-            }
+            cloneState.widgets = newWidgets
+            return cloneState
+
 
         case HEADING_TEXT_CHANGED:
-            return {
-                widgets: state.widgets.map(widget => {
+            newWidgets = state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.text = action.text
                     }
                     return Object.assign({}, widget)
                 })
-            }
+            cloneState.widgets = newWidgets
+            return cloneState
 
         case PREVIEW:
-            cloneState = Object.assign({}, state)
             cloneState.preview = !state.preview
             return cloneState
 
         case RENDER_IMG_URL:
-            return {
-                widgets: state.widgets.map(widget => {
+           newWidgets = state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.href = action.href
                     }
                     return Object.assign({}, widget)
                 })
-            }
+            cloneState.widgets = newWidgets
+            return cloneState
 
         case LIST_TYPE_CHANGED:
-            return {
-                widgets: state.widgets.map(widget => {
+            newWidgets = state.widgets.map(widget => {
                     if (widget.id === action.id) {
                         widget.listType = action.listType
                     }
                     return Object.assign({}, widget)
                 })
-            }
+            cloneState.widgets = newWidgets
+            return cloneState
 
         case SELECT_EDIT:
-            cloneState = Object.assign({}, state)
             cloneState.editingWidget = action.id
+            cloneState.preview = false
             return cloneState
         default:
             return state

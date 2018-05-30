@@ -10,6 +10,7 @@ class WidgetList extends React.Component {
         this.props.findAllWidgets()
     }
     render() {
+        console.log(this.props)
         return(
             <div>
                 <h1>LESSON EDITOR</h1>
@@ -30,7 +31,6 @@ class WidgetList extends React.Component {
                     ))}
                 </ul>
                 <button
-                    hidden={this.props.inPreviewMode}
                     onClick={this.props.addWidget}>Add</button>
             </div>
         )
@@ -41,7 +41,7 @@ class WidgetList extends React.Component {
 export const stateMapper = (state) => (
     {widgets: state.widgets,
     inPreviewMode: state.preview,
-    editingWidget: null}
+    editingWidget: state.editingWidget}
 )
 
 export const dispatchMapper = dispatch => ({
