@@ -7,19 +7,13 @@ import { Provider} from 'react-redux'
 import {widgetReducer} from "./reducer/widgetReducer";
 import {WidgetListApp} from "./containers/widgetList";
 
-
-
-window.onbeforeunload = function() {
-    return "Are you sure you want to navigate away?";
-}
-
 ReactDOM.render(
     <Router>
 
     <Provider store={createStore(widgetReducer)}>
         <Route
             path="/topic/:tid/widget"
-            component={ WidgetListApp }>
+            component={WidgetListApp}>
         </Route>
     </Provider>
     </Router>,

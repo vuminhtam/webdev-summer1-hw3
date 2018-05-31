@@ -8,13 +8,13 @@ export default
 class WidgetList extends React.Component {
     constructor(props) {
         super(props)
+        // this.props.findAllWidgets()
         this.props.findAllWidgetsByLessonID(this.props.match.params.tid)
     }
 
     render() {
         return(
             <div>
-
                 <h1>CONTENT EDITOR
                     <span className="badge badge-light">{this.props.widgets.length}</span>
                 </h1>
@@ -53,6 +53,7 @@ class WidgetList extends React.Component {
         )
     }
 }
+
 
 const setPreviewText = (inMode) => {
     if(!inMode) {
